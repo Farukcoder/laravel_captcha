@@ -120,6 +120,8 @@
     <script src="{{ asset('public/assets/backend') }}/plugins/toastr/toastr.min.js"></script>
     <script src="{{ asset('public/assets/backend') }}/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Summernote -->
+    <script src="{{ asset('public/assets/backend') }}/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- Page specific script -->
 
     <script>
@@ -201,6 +203,18 @@
                 "responsive": true,
             });
         });
+    </script>
+    <script>
+        $(function() {
+            // Summernote
+            $('.summernote').summernote()
+
+            // CodeMirror
+            // CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            //     mode: "htmlmixed",
+            //     theme: "monokai"
+            // });
+        })
     </script>
     @stack('script')
 

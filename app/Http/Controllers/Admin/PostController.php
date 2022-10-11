@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subctegory;
 use DB;
-
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Image;
 class PostController extends Controller
 {
     public function __construct()
@@ -35,22 +36,53 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
+
         $validated = $request->validate([
+            'title' => 'required',
             'subcategory_id' => 'required',
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'tags' => 'required|max:255',
-            // 'title' => 'required|max:255',
+            'post_date' => 'required',
+            'tags' => 'required',
+            'description' => 'required',
+            'image' => 'required',
         ]);
 
-        dd($request->all());
-        Subctegory::insert([
-            'category_id' => $request->category_id,
-            'name' => $request->name
-        ]);
+        // dd($request->all());
+        $category_id = DB::table('subcategoris')->where('id',$request->subcategory_id)->first()->category_id;
 
-        $notification = array('messege' => 'subCategory Inserted', 'alert-type' => 'success');
-        return redirect()->route('sub_category.create')->with($notification);
+        $slug = Str::of($request->title)->slug('-');
+        // dd($category_id);
+
+        $data = array();
+
+        $data['category_id']= $category_id;
+        $data['subcategory_id']= $request->subcategory_id;
+        $data['title']= $request->title;
+        $data['post_date']= $request->post_date;
+        $data['description']= $request->description;
+        $data['tags']= $request->tags;
+        $data['user_id']= Auth::id();
+        $data['status']= $request->status;
+
+        $photo = $request->image;
+
+        if($photo){
+            $photo_name = $slug.'.'. $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600,400)->save('public/media/'.$photo_name);
+
+            $data['image'] = 'public/media/'.$photo_name;
+
+            DB::table('post')->insert($data);
+            $notification = array('messege' => 'Post Created', 'alert-type' => 'success');
+            return redirect()->back()->with($notification);
+        }
+
+        DB::table('post')->insert($data);
+        $notification = array('messege' => 'Post Created', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+        // return response()->json($data);
+
+
     }
 
     public function edit($id)

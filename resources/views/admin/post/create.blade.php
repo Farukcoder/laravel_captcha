@@ -11,7 +11,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{'post.store'}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -19,8 +19,8 @@
                     <input type="text" class="form-control" name="title" id="title" placeholder="Post Title" required>
                   </div>
                   <div class="form-group">
-                    <label for="category">Category</label>
-                    <select name="category_id" class="form-control" id="subcategory_id">
+                    <label for="subcategory">Sub Category</label>
+                    <select name="subcategory_id" class="form-control" id="subcategory_id">
                         <option disabled selected>Choose Category</option>
                         @foreach($category as $value)
                             @php
@@ -34,12 +34,12 @@
                         @endforeach
                     </select>
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="subcategory ">Sub Category</label>
                     <select name="subcategory_id" class="form-control" id="subcategory_id">
                         <option value="">Example 1</option>
                     </select>
-                  </div>
+                  </div> --}}
                   <div class="form-group">
                     <label for="subcategory ">Post Date</label>
                      <input type="date" class="form-control" name="post_date" id="post_date" placeholder="Post Title">
@@ -49,8 +49,8 @@
                     <input type="text" class="form-control" name="tags" id="tags" placeholder="tags">
                   </div>
                   <div class="form-group">
-                    <label for="subcategory ">Description</label>
-                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                    <label for="description ">Description</label>
+                    <textarea class="form-control summernote" name="description" id="summernote" rows="4" placeholder="Enter ..."></textarea>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputFile">File input</label>
