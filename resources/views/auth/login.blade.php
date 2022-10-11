@@ -41,13 +41,10 @@
                             @enderror
                         </div>
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-12">
                                 <div class="icheck-primary">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                                    {!! NoCaptcha::renderJs('en', false, 'recaptchaCallback') !!}
+                                    {!! NoCaptcha::display() !!}
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -73,6 +70,11 @@
     </div>
 @endsection
 
+<script type="text/javascript">
+  var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
+</script>
 {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
