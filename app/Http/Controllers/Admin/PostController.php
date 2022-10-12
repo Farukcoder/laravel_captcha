@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subctegory;
+use App\Models\Post;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -21,7 +22,7 @@ class PostController extends Controller
     {
         // $category = DB::table('categoris')->get();
         // $category = Subctegory::all();
-        $data = Subctegory::all();
+        $data = Post::all();
 
         return view('admin.post.index', compact('data'));
     }
@@ -68,9 +69,9 @@ class PostController extends Controller
 
         if($photo){
             $photo_name = $slug.'.'. $photo->getClientOriginalExtension();
-            Image::make($photo)->resize(600,400)->save('public/media/'.$photo_name);
+            Image::make($photo)->resize(600,400)->save('public/assets/images/'.$photo_name);
 
-            $data['image'] = 'public/media/'.$photo_name;
+            $data['image'] = 'public/assets/images/'.$photo_name;
 
             DB::table('post')->insert($data);
             $notification = array('messege' => 'Post Created', 'alert-type' => 'success');

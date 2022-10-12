@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use APP\Models\Category;
-use APP\Models\Subctegory;
-use APP\Models\User;
+use App\Models\Category;
+use App\Models\Subctegory;
+use App\Models\User;
 
 class Post extends Model
 {
     use HasFactory;
-
+    protected $table = 'post';
     protected $fillable = [
         'category_id','subcategory_id','title','post_date','description','image',
     ];
