@@ -54,7 +54,7 @@
                                     <td>{{$row->subcategory->name}}</td>
                                     <td>{{$row->user->name}}</td>
                                     <td>{{$row->title}}</td>
-                                    <td>{{$row->post_date}}</td>
+                                    <td>{{ date( 'd F y',strtotime($row->post_date))}}</td>
                                     <td>
                                         @if ($row->status == 1)
                                             <span class="badge badge-success">Active</span>
@@ -62,8 +62,8 @@
                                             <span class="badge badge-danger">Inactive</span>
                                         @endif
                                     <td>
-                                        <a href="{{route('sub_category.edit', $row->id)}}" class="btn btn-sm btn-info">Edit</a>
-                                        <a href="{{route('sub_category.delete', $row->id)}}" class="btn btn-sm btn-danger button">Delete</a>
+                                        <a href="{{route('post.edit', $row->id)}}" class="btn btn-sm btn-info">Edit</a>
+                                        <a href="{{route('post.delete', $row->id)}}" class="btn btn-sm btn-danger button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

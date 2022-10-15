@@ -11,6 +11,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Image;
+use File;
 class PostController extends Controller
 {
     public function __construct()
@@ -80,7 +81,7 @@ class PostController extends Controller
 
         DB::table('post')->insert($data);
         $notification = array('messege' => 'Post Created', 'alert-type' => 'success');
-        return redirect()->back()->with($notification);
+        return redirect()->route('post.index')->with($notification);
         // return response()->json($data);
 
 
@@ -113,9 +114,13 @@ class PostController extends Controller
         // $category = Category::find($id);
         // $category->delete();
 
-        Subctegory::destroy($id);
+        $post = Post::find($id);
+        if(File::exists($post->image)){
+            File::delete($post->image);
+        }
+        $post->delete();
 
-        $notification = array('messege' => 'sub Category Deleted', 'alert-type' => 'success');
-        return redirect()->route('sub_category.update')->with($notification);
+        $notification = array('messege' => 'post Deleted', 'alert-type' => 'success');
+        return redirect()->route('post.index')->with($notification);
     }
 }
