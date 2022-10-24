@@ -65,7 +65,7 @@
                     </div>
                   </div>
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <input type="checkbox" class="form-check-input" id="status" name="status" value="1">
                     <label class="form-check-label" for="exampleCheck1">Published Now</label>
                   </div>
                 </div>
