@@ -3,10 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\PostProcessed;
-use App\Mail\usermail;
+use App\Mail\UserMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class SendPostNotification
 {

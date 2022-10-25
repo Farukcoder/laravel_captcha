@@ -7,11 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class usermail extends Mailable
+class UserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $post;
+
     /**
      * Create a new message instance.
      *
