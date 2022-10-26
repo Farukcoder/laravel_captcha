@@ -7,7 +7,8 @@ use App\Mail\UserMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Auth;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 class SendPostNotification
 {
     /**
@@ -28,7 +29,10 @@ class SendPostNotification
      */
     public function handle(PostProcessed $event)
     {
+        $user = User::all();
 
-        \Mail::to(Auth::user()->email)->send(new usermail($event->post));
+        foreach($user as $users){
+            \Mail::to($users->email)->send(new usermail($event->post));
+        }
     }
 }
